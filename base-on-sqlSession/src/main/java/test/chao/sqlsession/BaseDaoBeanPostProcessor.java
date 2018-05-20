@@ -31,7 +31,7 @@ public class BaseDaoBeanPostProcessor implements BeanPostProcessor {
     @Override
     public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
         if (BaseDao.class.isAssignableFrom(AopUtils.getTargetClass(bean))) {
-            // 采用cglib做代理,自类更灵活
+            // 采用cglib做代理,子类更灵活
             return CglibProxy.newInstance(bean);
         }
         return bean;

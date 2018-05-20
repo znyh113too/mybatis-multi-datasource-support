@@ -1,15 +1,31 @@
 package test.chao.sqlsession.dao;
 
+import javax.annotation.Resource;
+
+import org.apache.ibatis.session.SqlSession;
+import org.springframework.stereotype.Component;
+
+import test.chao.base.SwitchDataSource;
 import test.chao.base.User;
 
 /**
  * @author xiezhengchao
- * @since 2018/5/20 15:24
+ * @since 2018/5/20 17:19
  */
-public interface UserDao extends BaseDao {
+@Component
+public class UserDao extends BaseDaoImpl {
 
-    User selectByPrimaryKeyTest1(Long id);
+    @Resource
+    private SqlSession sqlSession;
 
-    User selectByPrimaryKeyTest2(Long id);
+    @SwitchDataSource("test1")
+    public User selectByPrimaryKeyTest1(Long id) {
+        return sqlSession.selectOne("selectByPrimaryKey", id);
+    }
+
+    @SwitchDataSource("test2")
+    public User selectByPrimaryKeyTest2(Long id) {
+        return sqlSession.selectOne("selectByPrimaryKey", id);
+    }
 
 }

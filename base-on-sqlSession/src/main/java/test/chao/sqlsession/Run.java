@@ -23,7 +23,7 @@ import test.chao.sqlsession.dao.UserDao;
 public class Run implements CommandLineRunner {
 
     @Resource
-    private UserDao userMapperImpl;
+    private UserDao userDao;
 
     public static void main(String[] args) {
         SpringApplication.run(Run.class, args);
@@ -31,10 +31,10 @@ public class Run implements CommandLineRunner {
 
     @Override
     public void run(String...args) throws Exception {
-        User user1 = userMapperImpl.selectByPrimaryKeyTest1(1L);
+        User user1 = userDao.selectByPrimaryKeyTest1(1L);
         System.out.println("db1 user:" + user1);
 
-        User user2 = userMapperImpl.selectByPrimaryKeyTest2(1L);
+        User user2 = userDao.selectByPrimaryKeyTest2(1L);
         System.out.println("db2 user:" + user2);
     }
 
