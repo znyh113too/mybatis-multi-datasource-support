@@ -13,7 +13,7 @@ import test.chao.base.User;
 import test.chao.sqlsession.dao.UserDao;
 
 /**
- * 基于Mybatis的Mapper代理拓展进行切换数据库
+ * 基于Mybatis的SqlSession拓展进行切换数据库
  * 
  * @author xiezhengchao
  * @since 2018/5/20 14:43

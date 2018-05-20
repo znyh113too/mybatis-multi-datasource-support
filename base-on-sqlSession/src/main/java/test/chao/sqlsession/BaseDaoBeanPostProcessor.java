@@ -15,6 +15,8 @@ import test.chao.base.SwitchDataSource;
 import test.chao.sqlsession.dao.BaseDao;
 
 /**
+ * 为容器中的Dao生成代理
+ * 
  * @author xiezhengchao
  * @since 2018/5/20 18:56
  */
