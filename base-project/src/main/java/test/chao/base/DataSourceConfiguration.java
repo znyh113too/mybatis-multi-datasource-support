@@ -1,13 +1,5 @@
 package test.chao.base;
 
-import org.apache.tomcat.jdbc.pool.DataSource;
-import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Primary;
-import org.springframework.context.annotation.PropertySource;
-import org.springframework.core.io.ClassPathResource;
-
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.sql.Connection;
@@ -15,6 +7,14 @@ import java.sql.DriverManager;
 import java.sql.Statement;
 import java.util.HashMap;
 import java.util.Map;
+
+import org.apache.tomcat.jdbc.pool.DataSource;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.core.io.ClassPathResource;
 
 /**
  * @author xiezhengchao
@@ -49,7 +49,7 @@ public class DataSourceConfiguration {
 
     private void initH2DB(DataSource dataSource, String schemaSql, String dataSql) {
         try {
-            Class.forName("org.h2.Driver");
+            Class.forName(dataSource.getDriverClassName());
             Connection conn = DriverManager.getConnection(dataSource.getUrl());
             Statement stmt = conn.createStatement();
             stmt.executeUpdate(schemaSql);
