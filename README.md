@@ -1,6 +1,7 @@
 # mybatis-multi-datasource-support
 基于Mybatis的DataSource拓展的多数据封装(更灵活简单,不支持JTA)
 
+## 设计思路参考:https://www.jianshu.com/p/508cea940fb8
 
 # 前言
 这个包只是一个演示,需要修改之后再放到项目中使用.尤其注意异常的catch,分支场景等.
