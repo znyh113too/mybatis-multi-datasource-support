@@ -42,8 +42,8 @@ public class DataSourceConfiguration {
         Map<String, DataSource> dataSourceMap = new HashMap<>(2);
         dataSourceMap.put("test1", dataSource1());
         dataSourceMap.put("test2", dataSource2());
-        initH2DB(dataSource1(), classPath2Str("sql/schema.sql"), classPath2Str("sql/data1.sql"));
-        initH2DB(dataSource2(), classPath2Str("sql/schema.sql"), classPath2Str("sql/data2.sql"));
+        initH2DB(dataSource1(), readResource("sql/schema.sql"), readResource("sql/data1.sql"));
+        initH2DB(dataSource2(), readResource("sql/schema.sql"), readResource("sql/data2.sql"));
         return new MultiDataSource(dataSource1(), dataSourceMap);
     }
 
@@ -61,7 +61,7 @@ public class DataSourceConfiguration {
         }
     }
 
-    private String classPath2Str(String classPath) {
+    private String readResource(String classPath) {
         try {
             InputStream is = new ClassPathResource(classPath).getInputStream();
             ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
