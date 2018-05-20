@@ -27,6 +27,32 @@ public class MultiDataSource implements javax.sql.DataSource {
                 new Class<?>[] { javax.sql.DataSource.class }, new DataSourceHandle(defaultDataSource, dataSourceMap));
     }
 
+
+    private class DataSourceHandle implements InvocationHandler {
+
+        private DataSource defaultDataSource;
+        private Map<String, DataSource> dataSourceMap;
+
+        DataSourceHandle(DataSource defaultDataSource, Map<String, DataSource> dataSourceMap) {
+            this.defaultDataSource = defaultDataSource;
+            this.dataSourceMap = dataSourceMap;
+        }
+
+        @Override
+        public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+            return method.invoke(selectedDataSource(), args);
+        }
+
+        private DataSource selectedDataSource() {
+            if (DataSourceSelector.get() == null) {
+                return defaultDataSource;
+            }
+
+            return dataSourceMap.getOrDefault(DataSourceSelector.get(), defaultDataSource);
+        }
+    }
+
+
     @Override
     public Connection getConnection() throws SQLException {
         return dataSourceProxy.getConnection();
@@ -72,27 +98,4 @@ public class MultiDataSource implements javax.sql.DataSource {
         return dataSourceProxy.isWrapperFor(iface);
     }
 
-    private class DataSourceHandle implements InvocationHandler {
-
-        private DataSource defaultDataSource;
-        private Map<String, DataSource> dataSourceMap;
-
-        DataSourceHandle(DataSource defaultDataSource, Map<String, DataSource> dataSourceMap) {
-            this.defaultDataSource = defaultDataSource;
-            this.dataSourceMap = dataSourceMap;
-        }
-
-        @Override
-        public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-            return method.invoke(selectedDataSource(), args);
-        }
-
-        private DataSource selectedDataSource() {
-            if (DataSourceSelector.get() == null) {
-                return defaultDataSource;
-            }
-
-            return dataSourceMap.getOrDefault(DataSourceSelector.get(), defaultDataSource);
-        }
-    }
 }

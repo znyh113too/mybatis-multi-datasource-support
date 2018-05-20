@@ -7,6 +7,7 @@ import java.lang.reflect.Proxy;
 import org.mybatis.spring.mapper.MapperFactoryBean;
 
 import test.chao.base.DataSourceSelector;
+import test.chao.base.SwitchDataSource;
 
 /**
  * @author xiezhengchao

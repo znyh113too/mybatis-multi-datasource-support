@@ -3,6 +3,7 @@ package test.chao.mapper;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
+import test.chao.base.SwitchDataSource;
 import test.chao.base.User;
 
 /**

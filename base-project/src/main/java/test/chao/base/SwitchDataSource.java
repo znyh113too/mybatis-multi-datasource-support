@@ -1,4 +1,4 @@
-package test.chao.mapper;
+package test.chao.base;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

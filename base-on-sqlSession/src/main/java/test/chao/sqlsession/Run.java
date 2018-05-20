@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Import;
 
 import test.chao.base.DataSourceConfiguration;
 import test.chao.base.User;
+import test.chao.sqlsession.dao.UserDao;
 
 /**
  * 基于Mybatis的Mapper代理拓展进行切换数据库
@@ -22,7 +23,7 @@ import test.chao.base.User;
 public class Run implements CommandLineRunner {
 
     @Resource
-    private UserMapper userMapper;
+    private UserDao userMapperImpl;
 
     public static void main(String[] args) {
         SpringApplication.run(Run.class, args);
@@ -30,10 +31,10 @@ public class Run implements CommandLineRunner {
 
     @Override
     public void run(String...args) throws Exception {
-        User user1 = userMapper.selectByPrimaryKeyTest1(1L);
+        User user1 = userMapperImpl.selectByPrimaryKeyTest1(1L);
         System.out.println("db1 user:" + user1);
 
-        User user2 = userMapper.selectByPrimaryKeyTest2(1L);
+        User user2 = userMapperImpl.selectByPrimaryKeyTest2(1L);
         System.out.println("db2 user:" + user2);
     }
 
